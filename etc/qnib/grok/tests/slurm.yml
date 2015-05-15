@@ -1,0 +1,30 @@
+description: patterns to deal with SLURM logs
+owner: "Christian Kniep <christian@qnib.org>"
+tests:
+  task_tuple:
+     compare: "%{SLURM_TASK_TUPLE}"
+     input: "5.2"
+     result: { 
+        "slurm_jobid":  5, "slurm_taskid": 2
+     }
+  ipv4:
+     compare: "%{IPV4:ip}"
+     input: "172.17.0.12"
+     result: { 
+        "ip": "172.17.0.12"
+     }
+  client_tuple:
+     compare: "%{SLURM_CLIENT_TUPLE}"
+     input: "3005.3005@172.17.0.12"
+     result: { 
+        "userid": 3005, "groupid": 3005,
+        "slurm_client": "172.17.0.12"
+     }
+  task_launch_complete:
+     compare: "%{SLURM_TASK}"
+     input: "launch task 5.2 request from 3005.3005@172.17.0.12 (port 22717)"
+     result: { 
+        "slurm_jobid": 5, "slurm_taskid": 2,
+        "userid": 3005, "groupid": 3005,
+        "slurmd_port": 22717, "slurm_client": "172.17.0.12"
+     }

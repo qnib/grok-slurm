@@ -1,0 +1,7 @@
+INT \d+
+IPV4 \d+\.\d+\.\d+\.\d+
+#
+SLURM_TASK_TUPLE %{INT:slurm_jobid}.%{INT:slurm_taskid}
+SLURM_CLIENT_TUPLE %{INT:userid}.%{INT:groupid}@%{IPV4:slurm_client}
+# slurmd slurmd: launch task 5.2 request from 3005.3005@172.17.0.12 (port 22717)
+SLURM_TASK launch task %{SLURM_TASK_TUPLE} request from %{SLURM_CLIENT_TUPLE} \(port %{INT:slurmd_port}\)
