@@ -5,7 +5,7 @@ tests:
      compare: "%{SLURM_TASK_TUPLE}"
      input: "5.2"
      result: { 
-        "slurm_jobid":  5, "slurm_taskid": 2
+        "slurm_jobid": 5, "slurm_taskid": 2
      }
   ipv4:
      compare: "%{IPV4:ip}"
@@ -22,9 +22,15 @@ tests:
      }
   task_launch_complete:
      compare: "%{SLURM_TASK}"
-     input: "launch task 5.2 request from 3005.3005@172.17.0.12 (port 22717)"
+     input: "slurmd slurmd: launch task 5.2 request from 3005.3005@172.17.0.12 (port 22717)"
      result: { 
         "slurm_jobid": 5, "slurm_taskid": 2,
         "userid": 3005, "groupid": 3005,
         "slurmd_port": 22717, "slurm_client": "172.17.0.12"
+     }
+  run_prolog:
+     compare: "%{SLURM_RUN_PROLOG}"
+     input: "slurmd slurmd: _run_prolog: run job script took usec=40"
+     result: { 
+        "prolog_wall_usec": 40
      }
