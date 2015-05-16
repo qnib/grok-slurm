@@ -8,3 +8,6 @@ SLURM_CLIENT_TUPLE %{INT:userid}.%{INT:groupid}@%{IPV4:slurm_client}
 SLURM_TASK launch task %{SLURM_TASK_TUPLE} request from %{SLURM_CLIENT_TUPLE} \(port %{INT:slurmd_port}\)
 # slurmd slurmd: _run_prolog: run job script took usec=40
 SLURM_RUN_PROLOG  run job script took usec=%{INT:prolog_wall_usec}
+
+#Launching batch job 4 for UID 4002
+SLURM_START_BATCH Launching batch job %{INT:slurm_jobid} for UID %{INT:userid}

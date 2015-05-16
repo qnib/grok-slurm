@@ -34,3 +34,9 @@ tests:
      result: { 
         "prolog_wall_usec": 40
      }
+  start_batch:
+     compare: "%{SLURM_START_BATCH}"
+     input: "slurmd slurmd: Launching batch job 4 for UID 4002"
+     result: { 
+        "userid": 4002, "slurm_jobid": 4
+     }
